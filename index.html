@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <style>
+            label {
+                margin-right:20px;
+                text-decoration: none !important;
+                text-align:right;
+            }
+            abbr {
+                text-decoration: none !important;
+            }
+            
+            .tooltiptext {
+ 
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+input:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+        </style>
+    </head>
+    <body>
+        <form>
+                <p> <label>Email<abbr title="this field is mandatory">*</abbr></label><input type="email" required id="email"></p>
+                <div id="emailErrorDiv" class="tooltiptext hide">Email address should be same</div>
+                <p> <label>Confirm Email<abbr title="this field is mandatory">*</abbr></label><input type="email" required id="confirm-email"></p>
+                <p><label>Country<abbr title="this field is mandatory">*</abbr></label><input type="text" required id="country" pattern=[A-za-z]+></p>
+                <p><label>Zip Code<abbr title="this field is mandatory">*</abbr></label><input type="text" required id="zipcode" minlength=4 maxlength=8 inputmode="numeric"></p>
+                <p> <label>Password<abbr title="this field is mandatory">*</abbr></label><input type="password" required id="pwd" pattern="[a-zA-Z0-9!@_.#$]+" minlength=8 maxlength=18></p>
+                <div id="pwdErrorDiv" class="tooltiptext hide">Password address should be same</div>
+                <p> <label>Confirm Password<abbr title="this field is mandatory">*</abbr></label><input type="password" required id="confirm-pwd" pattern="[a-zA-Z0-9!@_.#$]+" minlength=8 maxlength=18></p>
+                                    <p><button id="submit">Submit</button></p>
+
+        </form>
+        <div id="errorDiv"></div>
+    </body>
+    <script>
+        const confirmEmail = document.querySelector("#confirm-email");
+        const confirmPwd = document.querySelector("#confirm-pwd");
+        confirmEmail.addEventListener('keyup',(e)=>{
+            console.log("keyupemail")
+            let emailVal = document.querySelector("#email").value;
+            let confirmEmailval = document.querySelector("#confirm-email").value;
+            let emailerrorDiv = document.querySelector("#emailErrorDiv");
+            if(emailVal.indexOf(confirmEmailval)<=-1)
+            {
+                
+                emailerrorDiv.classList.remove("hide");
+            }
+            else
+            {
+                emailerrorDiv.classList.add("hide");
+            }
+        });
+
+        confirmPwd.addEventListener('keyup',(e)=>{
+            let pwd = document.querySelector("#pwd").value;
+            let confirmPwd = document.querySelector("#confirm-pwd").value;
+            let pwderrorDiv = document.querySelector("#pwdErrorDiv");
+            if(pwd.indexOf(confirmPwd )<=-1)
+            {
+                
+                pwderrorDiv.classList.remove("hide");
+            }
+            else
+            {
+                pwderrorDiv.classList.add("hide");
+            }
+        });
+    </script>
+
+</html>
